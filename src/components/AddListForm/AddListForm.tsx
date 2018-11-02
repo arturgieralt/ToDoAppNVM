@@ -1,25 +1,31 @@
 import * as React from "react";
 import * as uuid from 'uuid';
 import { List } from 'src/store/store.types';
+import { AddListAction, ADD_LIST } from 'src/actions/action.types';
 
 interface IAddListFormState {
     list: List;
     isValid: boolean;
 }
 
-export class AddListForm extends React.Component<{}, IAddListFormState> {
-    constructor (props: {}) {
-        super(props);
-        const id = uuid.v4();
+interface IAddListProps {
+    onAdd: (list: List) => AddListAction<ADD_LIST>;
+}
 
-        this.state = {
-            list: {
-                title: '',
-                id,
-                orderedTasks: []
-            },
-            isValid: false
-        };
+export class AddListForm extends React.Component<IAddListProps, IAddListFormState> {
+    
+    private initState: IAddListFormState = {
+        list: {
+            title: '',
+            id: '',
+            orderedTasks: []
+        },
+        isValid: false
+    }
+
+    constructor (props: IAddListProps) {
+        super(props);
+        this.state = {...this.initState};
     }
 
     public render() {
@@ -33,12 +39,25 @@ export class AddListForm extends React.Component<{}, IAddListFormState> {
     } 
     
     private onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {value, name} = event.target;
+        const {value} = event.target;
         const list = Object.assign({}, this.state.list, {
-            [name]: value
-        })
-        this.setState({
-            list
+            title: value
         });
+        this.setState({
+            list,
+            isValid: (value.length > 0) ? true : false
+        });
+    }
+
+    private addList = (event: React.MouseEvent<HTMLInputElement>) => {
+        if(this.state.isValid) {
+            const listWithId = Object.assign({}, this.state.list, {
+                id: uuid.v4()
+            });
+            this.props.onAdd(listWithId);
+            this.setState({
+                ...this.initState
+            });
+        }
     }
 }

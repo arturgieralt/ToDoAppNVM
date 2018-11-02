@@ -17,6 +17,10 @@ export class TaskList extends React.Component <IChildrenProps> {
 
     public render() {
         const { children } = this.props;
-        return ({children});
+        return (<div>
+                {children}
+                </div>
+            
+            );
     }
 }

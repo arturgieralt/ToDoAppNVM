@@ -1,5 +1,5 @@
 import { Task, List } from "src/store/store.types";
-import * as actionTypes from './../../actions/action.types';
+import * as actionTypes from './../actions/action.types';
 
 export interface IListStateProps {
     tasks: Task[];
@@ -7,6 +7,7 @@ export interface IListStateProps {
 
 export interface IListProps {
     list: List;
+    onTaskAdd: (listId: string) => void;
 }
 
 export interface IListDispatchProps {
