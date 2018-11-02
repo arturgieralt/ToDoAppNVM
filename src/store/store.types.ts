@@ -13,6 +13,6 @@ export interface Task {
     id: string;
     title: string;
     isDone: boolean;
-    expiryDate: Date | null;
+    expiryDate: string | undefined;
     listId: string;
 }

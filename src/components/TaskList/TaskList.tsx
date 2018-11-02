@@ -1,7 +1,7 @@
 import * as React from "react";
-import { IChildrenProps } from './List.types';
+import { IChildrenProps } from './TaskList.types';
 
-export class ListComponent extends React.Component <IChildrenProps> {
+export class TaskList extends React.Component <IChildrenProps> {
     
     public static UnOrdered = function UnOrdered ({children}: IChildrenProps ) {
         return (<ul>{children}</ul>)

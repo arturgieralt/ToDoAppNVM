@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import * as actions from './../../actions/actionCreators';
 import { ReduxState} from 'src/store/store.types';
-import { ListComponent } from '../List/List';
+import { TaskList } from '../TaskList/TaskList';
 import { ListProps, IListStateProps, IListDispatchProps } from './ListContainer.types';
 import { Task } from '../Task/Task';
 
@@ -13,15 +13,15 @@ class ListContainer extends React.Component<ListProps> {
 
     public render() {
         return (
-            <ListComponent>
-                <ListComponent.Ordered>
+            <TaskList>
+                <TaskList.Ordered>
                             {this.props.list.orderedTasks.map((taskKey: string, index: number) =>(
-                                <ListComponent.Element>
+                                <TaskList.Element>
                                     <Task onClick={() => console.log()} task={this.props.tasks[0]} />
-                                </ListComponent.Element>
+                                </TaskList.Element>
                             ))} 
-                </ListComponent.Ordered>
-            </ListComponent>
+                </TaskList.Ordered>
+            </TaskList>
             
         )
     }   
