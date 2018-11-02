@@ -1,4 +1,4 @@
-export interface Store {
+export interface ReduxState {
     lists: List[];
     tasks: Task[];
 }
@@ -13,6 +13,6 @@ export interface Task {
     id: string;
     title: string;
     isDone: boolean;
-    expiryDate: Date;
+    expiryDate: Date | null;
     listId: string;
 }
