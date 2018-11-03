@@ -1,0 +1,7 @@
+.taskContainer h2, input {
+    display: inline;
+}
+
+.taskContainer {
+    padding: 10px;
+}

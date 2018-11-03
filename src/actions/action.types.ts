@@ -30,6 +30,7 @@ export interface SortTasksAction<T> extends Action {
 export interface ChangeTaskOrderAction<T> extends Action {
     type: T;
     listId: string,
+    taskId: string
     oldPosition: number,
     newPosition: number
 }

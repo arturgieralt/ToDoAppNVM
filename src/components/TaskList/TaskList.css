@@ -1,0 +1,38 @@
+.taskListContainer {
+    width:300px;
+    border: 1px solid orange;
+    margin: 10px 20px;
+}
+
+.taskListContainer ol, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.taskListHeader {
+    background-color: black;
+}
+
+.taskListHeader h2 {
+    box-sizing: border-box;
+    color: white;
+    font-size: 25px;
+    display: inline-block;
+    margin:0;
+    padding:0;
+    max-width: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.taskListHeader span {
+    font-size:26px;
+    font-weight: bold;
+    color: orange;
+    float: right;
+    margin:0;
+}
+
+.taskListHeader span:hover {
+    color: white;
+}

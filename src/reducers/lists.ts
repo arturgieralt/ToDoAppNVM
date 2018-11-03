@@ -15,6 +15,19 @@ export function listsReducer (state: IList[] = [], action: Action<string>) {
                 }
                 return list;
             });
+        case actionTypes.CHANGE_TASK_ORDER:
+            const {listId, newPosition, oldPosition, taskId} = (action as actionTypes.ChangeTaskOrderAction<actionTypes.CHANGE_TASK_ORDER>);
+            return state.map((list: IList) => {
+                if(listId === list.id) {
+                    const updatedTasks = [...list.orderedTasks];
+                    if (updatedTasks[oldPosition] === taskId) {
+                        updatedTasks.splice(newPosition, 0, updatedTasks.splice(oldPosition, 1)[0])
+                    }
+                    return Object.assign({}, list, {orderedTasks: updatedTasks})
+                }
+                return list;
+            });
+            
         default:
             return state; 
     }

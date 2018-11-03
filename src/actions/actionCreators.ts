@@ -19,11 +19,12 @@ export function addList(list: IList):
     }
 }
 
-export function changeTaskOrder(listId: string, oldPosition: number, newPosition: number):
+export function changeTaskOrder(listId: string, taskId: string, oldPosition: number, newPosition: number):
     actionTypes.ChangeTaskOrderAction<actionTypes.CHANGE_TASK_ORDER> {
     return {
         type: actionTypes.CHANGE_TASK_ORDER,
         listId,
+        taskId,
         oldPosition,
         newPosition
     }
