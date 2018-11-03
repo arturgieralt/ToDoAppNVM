@@ -9,7 +9,7 @@ export const Task = (props: ITaskProps) => {
         <div className='taskContainer'>
             <input type='checkbox' onChange={changeTaskStatus} checked={task.isDone}/>
             <h2>{task.title}</h2>
-            <span>{task.expiryDate}</span>
+            <span>{task.expiryDate && task.expiryDate.toLocaleString()}</span>
         </div>
     );
 }

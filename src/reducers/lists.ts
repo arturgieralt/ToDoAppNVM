@@ -1,4 +1,4 @@
-import { IList } from 'src/store/store.types';
+import { IList, ITask } from 'src/store/store.types';
 import * as actionTypes from './../actions/action.types';
 import { Action } from 'redux';
 
@@ -27,7 +27,28 @@ export function listsReducer (state: IList[] = [], action: Action<string>) {
                 }
                 return list;
             });
-            
+        case actionTypes.SORT_TASKS:
+        const allTasks = [...(action as actionTypes.SortTasksAction<actionTypes.SORT_TASKS>).tasks];
+        const { currentDate } = (action as actionTypes.SortTasksAction<actionTypes.SORT_TASKS>);
+            return state.map((list: IList) => {
+                const tasksToOrder = [...list.orderedTasks];
+                const [outdated, uptodate] = tasksToOrder.reduce(([old, fresh]: string[][], id: string, index: number) => {
+                    const currentTask = allTasks.find((t: ITask) => {
+                        return t.id === id;
+                    })
+                    if (currentTask) {
+                        if (currentTask.expiryDate && !currentTask.isDone) {
+                            return (currentTask.expiryDate.diff(currentDate, "ms") < 0)  ? [[...old, id], fresh] : [old, [...fresh, id]];
+                        }
+                    }
+                    return [old, [...fresh, id] ];
+                }, [[], []]);
+
+                const orderedList = [...outdated, ...uptodate];
+                return Object.assign({}, list, {
+                    orderedTasks: orderedList
+                });
+            });
         default:
             return state; 
     }

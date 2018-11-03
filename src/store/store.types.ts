@@ -1,3 +1,5 @@
+import { Moment } from 'moment';
+
 export interface IReduxState {
     lists: IList[];
     tasks: ITask[];
@@ -13,6 +15,6 @@ export interface ITask {
     id: string;
     title: string;
     isDone: boolean;
-    expiryDate: string | undefined;
+    expiryDate: Moment | undefined;
     listId: string;
 }

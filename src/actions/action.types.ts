@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { ITask, IList } from 'src/store/store.types';
+import { Moment } from 'moment';
 
 export const ADD_TASK = '[TASK]_ADD';
 export type ADD_TASK = typeof ADD_TASK;
@@ -24,7 +25,8 @@ export interface AddTaskAction<T> extends Action {
 
 export interface SortTasksAction<T> extends Action {
     type: T;
-    listId: string
+    tasks: ITask[];
+    currentDate: Moment
 }
 
 export interface ChangeTaskOrderAction<T> extends Action {

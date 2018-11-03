@@ -1,7 +1,9 @@
 import * as React from "react";
 import * as uuid from 'uuid';
+import * as Datetime  from 'react-datetime';
 import { IAddTaskFormProps, IAddTaskFormState } from './AddTaskForm.types';
-
+import './AddTask.css';
+import { Moment } from 'moment';
 export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskFormState> {
     
     private initState: IAddTaskFormState = {
@@ -13,7 +15,7 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
             id: ''
         },
         isValid: false
-    }
+    } 
 
     constructor (props: IAddTaskFormProps) {
         super(props);
@@ -24,12 +26,12 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
             task: {...this.initState.task, ...{listId}} 
         };
     }
-
+    
     public render() {
         return (
             <div>
                 <input type="text" onChange={this.onInputChange} name='title' placeholder='Your task title' value={this.state.task.title}/>
-                <input type='datetime-local' onChange={this.onInputChange} name='expiryDate' value={this.state.task.expiryDate} />
+                <Datetime onChange={this.changeDate} value={this.state.task.expiryDate} inputProps={{placeholder: 'Choose date'}}/> 
                 <input type='button' value='Add' onClick={this.addTask} disabled={!this.state.isValid} />
             </div>
             
@@ -45,6 +47,17 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
             task,
             isValid: (task.title.length > 0 && task.listId.length > 0) ? true : false
         });
+    }
+
+    private changeDate = (date: Moment | string) => {
+        if(typeof date !== "string") {
+            this.setState({
+                task: Object.assign({}, this.state.task, {
+                    expiryDate: (date as Moment)
+                })
+            });
+        }
+        
     }
 
     private addTask = (event: React.MouseEvent<HTMLInputElement>) => {

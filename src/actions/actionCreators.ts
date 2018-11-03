@@ -1,5 +1,6 @@
 import * as actionTypes from './action.types';
 import { ITask, IList } from 'src/store/store.types';
+import { Moment } from 'moment';
 
 
 
@@ -30,11 +31,12 @@ export function changeTaskOrder(listId: string, taskId: string, oldPosition: num
     }
 }
 
-export function sortTasks(listId: string):
+export function sortTasks(tasks: ITask[], currentDate: Moment):
     actionTypes.SortTasksAction<actionTypes.SORT_TASKS> {
     return {
         type: actionTypes.SORT_TASKS,
-        listId
+        tasks,
+        currentDate
     }
 }
 

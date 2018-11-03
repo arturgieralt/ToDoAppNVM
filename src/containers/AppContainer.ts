@@ -8,7 +8,8 @@ const mapStateToProps = (state: IReduxState ): IReduxState => (state);
 
 const mapDispatchToProps = {
     addTask: actions.addTask,
-    addList: actions.addList
+    addList: actions.addList,
+    sortTasks: actions.sortTasks
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App as any);

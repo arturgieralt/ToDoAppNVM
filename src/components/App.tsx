@@ -6,6 +6,7 @@ import ListContainer from 'src/containers/ListContainer';
 import { IList } from 'src/store/store.types';
 import { AddTaskForm } from './AddTask/AddTaskForm';
 import { Modal } from './Modal/Modal';
+import * as moment from 'moment';
 
 interface IAppState {
   activeListId: string | null;
@@ -20,6 +21,10 @@ class App extends React.Component <IAppProps, IAppState >{
   constructor(props: IAppProps) {
     super(props);
     this.state = {...this.initState}
+  }
+
+  public componentDidMount () {
+    setInterval(() => this.props.sortTasks(this.props.tasks, moment()), 5000);
   }
 
   public render() {
@@ -41,6 +46,8 @@ class App extends React.Component <IAppProps, IAppState >{
       activeListId: listId
     })
   }
+
+
 
 }
 
