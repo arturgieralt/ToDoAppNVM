@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreators';
-import { ReduxState} from 'src/store/store.types';
+import { IReduxState} from 'src/store/store.types';
 import App from 'src/components/App';
 
 
-const mapStateToProps = (state: ReduxState ): ReduxState => (state);
+const mapStateToProps = (state: IReduxState ): IReduxState => (state);
 
 const mapDispatchToProps = {
     addTask: actions.addTask,

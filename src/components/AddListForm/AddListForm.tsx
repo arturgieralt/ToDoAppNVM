@@ -1,15 +1,15 @@
 import * as React from "react";
 import * as uuid from 'uuid';
-import { List } from 'src/store/store.types';
+import { IList } from 'src/store/store.types';
 import { AddListAction, ADD_LIST } from 'src/actions/action.types';
 
 interface IAddListFormState {
-    list: List;
+    list: IList;
     isValid: boolean;
 }
 
 interface IAddListProps {
-    onAdd: (list: List) => AddListAction<ADD_LIST>;
+    onAdd: (list: IList) => AddListAction<ADD_LIST>;
 }
 
 export class AddListForm extends React.Component<IAddListProps, IAddListFormState> {

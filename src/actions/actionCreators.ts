@@ -1,9 +1,9 @@
 import * as actionTypes from './action.types';
-import { Task, List } from 'src/store/store.types';
+import { ITask, IList } from 'src/store/store.types';
 
 
 
-export function addTask(task: Task):
+export function addTask(task: ITask):
     actionTypes.AddTaskAction<actionTypes.ADD_TASK> {
     return {
         type: actionTypes.ADD_TASK,
@@ -11,7 +11,7 @@ export function addTask(task: Task):
     }
 }
 
-export function addList(list: List):
+export function addList(list: IList):
     actionTypes.AddListAction<actionTypes.ADD_LIST> {
     return {
         type: actionTypes.ADD_LIST,
@@ -34,6 +34,15 @@ export function sortTasks(listId: string):
     return {
         type: actionTypes.SORT_TASKS,
         listId
+    }
+}
+
+export function changeTaskStatus(taskId: string, isDone: boolean):
+    actionTypes.ChangeTaskStatusAction<actionTypes.CHANGE_TASK_STATUS> {
+    return {
+        type: actionTypes.CHANGE_TASK_STATUS,
+        taskId,
+        isDone
     }
 }
 

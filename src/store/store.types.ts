@@ -1,15 +1,15 @@
-export interface ReduxState {
-    lists: List[];
-    tasks: Task[];
+export interface IReduxState {
+    lists: IList[];
+    tasks: ITask[];
 }
 
-export interface List {
+export interface IList {
     id: string;
     title: string;
     orderedTasks: string[];
 }
 
-export interface Task {
+export interface ITask {
     id: string;
     title: string;
     isDone: boolean;

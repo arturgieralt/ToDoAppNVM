@@ -54,8 +54,10 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
                 id: uuid.v4()
             });
             this.props.addTask(taskWithId);
+            const { listId } = this.props;
             this.setState({
-                ...this.initState
+                ...this.initState,
+                task: {...this.initState.task, ...{listId}} 
             });
         }
     }

@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Task, List } from 'src/store/store.types';
+import { ITask, IList } from 'src/store/store.types';
 
 export const ADD_TASK = '[TASK]_ADD';
 export type ADD_TASK = typeof ADD_TASK;
@@ -13,9 +13,13 @@ export type CHANGE_TASK_ORDER = typeof CHANGE_TASK_ORDER;
 export const ADD_LIST = '[LIST]_ADD';
 export type ADD_LIST = typeof ADD_LIST;
 
+export const CHANGE_TASK_STATUS = '[TASK]_CHANGE_STATUS';
+export type CHANGE_TASK_STATUS = typeof CHANGE_TASK_STATUS;
+
+
 export interface AddTaskAction<T> extends Action {
     type: T;
-    task: Task
+    task: ITask
 }
 
 export interface SortTasksAction<T> extends Action {
@@ -32,5 +36,11 @@ export interface ChangeTaskOrderAction<T> extends Action {
 
 export interface AddListAction<T> extends Action {
     type: T;
-    list: List
+    list: IList
+}
+
+export interface ChangeTaskStatusAction<T> extends Action {
+    type: T;
+    taskId: string;
+    isDone: boolean;
 }
