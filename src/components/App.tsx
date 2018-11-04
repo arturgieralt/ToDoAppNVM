@@ -1,16 +1,12 @@
 import * as React from 'react';
 import './App.css';
 import { AddListForm } from './AddListForm/AddListForm';
-import { IAppProps } from './App.types';
+import { IAppProps, IAppState } from './App.types';
 import ListContainer from 'src/containers/ListContainer';
 import { IList } from 'src/store/store.types';
 import { AddTaskForm } from './AddTask/AddTaskForm';
 import { Modal } from './Modal/Modal';
 import * as moment from 'moment';
-
-interface IAppState {
-  activeListId: string | null;
-}
 
 class App extends React.Component <IAppProps, IAppState >{
 

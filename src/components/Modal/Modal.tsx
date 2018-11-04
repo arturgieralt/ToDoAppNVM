@@ -1,11 +1,6 @@
 import * as React from 'react';
 import  './Modal.css';
-interface IModalProps {
-    isOpened: boolean;
-    children: JSX.Element | JSX.Element [] | string | null;
-    onClose: () => void;
-    header: string;
-}
+import { IModalProps } from './Modal.types';
 
 export function Modal (props: IModalProps) {
     const style: React.CSSProperties = {

@@ -12,4 +12,4 @@ const mapDispatchToProps = {
     sortTasks: actions.sortTasks
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App as any);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

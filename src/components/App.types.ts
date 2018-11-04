@@ -8,4 +8,8 @@ export interface IAppActionProps {
     sortTasks: (tasks: ITask[], currentDate: Moment) => SortTasksAction<SORT_TASKS>;
 }
 
+export interface IAppState {
+    activeListId: string | null;
+  }
+  
 export type IAppProps = IReduxState & IAppActionProps;
