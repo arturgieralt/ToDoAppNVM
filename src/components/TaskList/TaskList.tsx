@@ -29,9 +29,11 @@ export class TaskList extends React.Component<ListProps, any> {
                     </h2>
                     <span onClick={() => this.props.onTaskAdd(this.props.list.id)}>&#43;</span>
                 </div>
-                <ol>
-                    {this.props.list.orderedTasks.map(this.renderTask)} 
-                </ol>
+                {
+                    this.props.list.orderedTasks.length > 0 ?
+                    <ol>{this.props.list.orderedTasks.map(this.renderTask)}</ol>
+                    : <p>Your list is empty. Add new task by clicking on + button above.</p>
+                } 
             </div>
             
         );

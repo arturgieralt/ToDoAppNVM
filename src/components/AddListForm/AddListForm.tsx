@@ -2,6 +2,7 @@ import * as React from "react";
 import * as uuid from 'uuid';
 import { IList } from 'src/store/store.types';
 import { AddListAction, ADD_LIST } from 'src/actions/action.types';
+import './AddListForm.css';
 
 interface IAddListFormState {
     list: IList;
@@ -30,7 +31,7 @@ export class AddListForm extends React.Component<IAddListProps, IAddListFormStat
 
     public render() {
         return (
-            <div>
+            <div className="addListContainer">
                 <input type="text" onChange={this.onInputChange} name='title' placeholder='Your list title' value={this.state.list.title}/>
                 <input type='button' value='Add' onClick={this.addList} disabled={!this.state.isValid} />
             </div>

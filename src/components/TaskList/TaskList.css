@@ -1,7 +1,12 @@
 .taskListContainer {
     width:300px;
-    border: 1px solid orange;
+    border: 2px solid gray;
     margin: 10px 20px;
+    border-radius: 10px;
+}
+
+.taskListContainer ol {
+    list-style-type: none;
 }
 
 .taskListContainer ol, ul, li {
@@ -9,30 +14,63 @@
     padding: 0;
 }
 
+.taskListContainer li:hover {
+    cursor: grab;
+}
+
+.taskListContainer li:last-of-type span {
+    border: none;
+}
+
+.taskListContainer p {
+    padding: 5px 20px;
+    font-size:14px;
+}
+
 .taskListHeader {
     background-color: black;
+    background-color: gray;
+    border-bottom: 1px dashed gray;
+    border-radius: 3px 3px 0 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 34px;
+    text-align: center;
 }
 
 .taskListHeader h2 {
     box-sizing: border-box;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     display: inline-block;
     margin:0;
     padding:0;
-    max-width: 260px;
+    max-width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
+    height: 33px;
 }
 
 .taskListHeader span {
-    font-size:26px;
+    font-size:24px;
     font-weight: bold;
     color: orange;
     float: right;
-    margin:0;
+    margin:-4px -5px 0 0;
 }
 
 .taskListHeader span:hover {
     color: white;
+    cursor: pointer;
 }
+
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+  }
+  

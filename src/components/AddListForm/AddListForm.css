@@ -1,0 +1,9 @@
+.addListContainer {
+    background-color: #c7fcd9;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}

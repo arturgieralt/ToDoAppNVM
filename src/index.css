@@ -1,5 +1,46 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+html, body {
+  margin:0;
+  padding:0;
+  font-family: 'Mukta', sans-serif;
 }
+
+
+#root {
+  padding-top: 60px;
+}
+
+input[type="button"] {
+    padding: 5px 16px;
+    background-color:white;
+    color: grey;
+    border: 1px solid grey;
+    margin: 2px 0;
+    border-radius: 3px;
+
+}
+
+input[type="button"]:hover {
+  background-color:grey;
+  color: white;
+}
+
+input[type="text"] {
+  padding: 5px 16px;
+  background-color:white;
+  color: black;
+  border: 1px solid grey;
+  margin: 2px 2px 2px 0;
+  border-radius: 3px;
+
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.6); /* IE */
+  -moz-transform: scale(1.6); /* FF */
+  -webkit-transform: scale(1.6); /* Safari and Chrome */
+  -o-transform: scale(1.6); /* Opera */
+  padding: 10px;
+}
+
