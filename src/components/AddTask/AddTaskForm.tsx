@@ -6,7 +6,7 @@ import './AddTask.css';
 import { Moment } from 'moment';
 export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskFormState> {
     
-    private initState: IAddTaskFormState = {
+    public initState: IAddTaskFormState = {
         task: {
             title: '',
             listId: '', 
@@ -26,19 +26,12 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
             task: {...this.initState.task, ...{listId}} 
         };
     }
-    
-    public render() {
-        return (
-            <div>
-                <input type="text" onChange={this.onInputChange} name='title' placeholder='Your task title' value={this.state.task.title}/>
-                <Datetime onChange={this.changeDate} value={this.state.task.expiryDate} inputProps={{placeholder: 'Choose date'}}/> 
-                <input type='button' value='Add' onClick={this.addTask} disabled={!this.state.isValid} />
-            </div>
-            
-        )
-    } 
-    
-    private onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    public guidProvider (): string {
+        return uuid.v4();
+    }
+        
+    public onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {value, name} = event.target;
         const task = Object.assign({}, this.state.task, {
             [name]: value
@@ -49,7 +42,7 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
         });
     }
 
-    private changeDate = (date: Moment | string) => {
+    public changeDate = (date: Moment | string) => {
         if(typeof date !== "string") {
             this.setState({
                 task: Object.assign({}, this.state.task, {
@@ -60,11 +53,11 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
         
     }
 
-    private addTask = (event: React.MouseEvent<HTMLInputElement>) => {
+    public addTask = (event: React.MouseEvent<HTMLInputElement>) => {
         
         if(this.state.isValid) {
             const taskWithId = Object.assign({}, this.state.task, {
-                id: uuid.v4()
+                id: this.guidProvider()
             });
             this.props.addTask(taskWithId);
             const { listId } = this.props;
@@ -74,4 +67,14 @@ export class AddTaskForm extends React.Component<IAddTaskFormProps, IAddTaskForm
             });
         }
     }
+    
+    public render() {
+        return (
+            <div>
+                <input type="text" onChange={this.onInputChange} name='title' placeholder='Your task title' value={this.state.task.title}/>
+                <Datetime onChange={this.changeDate} value={this.state.task.expiryDate} inputProps={{placeholder: 'Choose date'}}/> 
+                <input type='button' value='Add' onClick={this.addTask} disabled={!this.state.isValid} />
+            </div>
+        );
+    } 
 }

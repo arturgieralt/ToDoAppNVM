@@ -10,7 +10,7 @@ import * as moment from 'moment';
 
 class App extends React.Component <IAppProps, IAppState >{
 
-  private initState: IAppState = {
+  public initState: IAppState = {
     activeListId: null
   }
 
@@ -20,31 +20,36 @@ class App extends React.Component <IAppProps, IAppState >{
   }
 
   public componentDidMount () {
-    setInterval(() => this.props.sortTasks(this.props.tasks, moment()), 5000);
+    const interval = 5000;
+    setInterval(() => this.props.sortTasks(this.props.tasks, moment()), interval); // did not destruct to keep the ref
   }
 
+  public setActiveListId = (listId: string | null) => {
+    this.setState ({
+      activeListId: listId
+    });
+  }
+
+  public setActiveListToNull = () => this.setActiveListId(null);
+
+  public renderList = (list: IList, index: number) => {
+    return <ListContainer onTaskAdd={this.setActiveListId} key={list.id} list={list}/>
+  }
   public render() {
+    const {addList, addTask} = this.props;
+    const { activeListId } = this.state;
+    const isModalOpened = activeListId ? true : false;
     return (
       <div className="App">
-        <AddListForm onAdd={this.props.addList}/>
-        <Modal isOpened={this.state.activeListId ? true : false} onClose={() => this.setActiveListId(null)} header='Add task'>
-          {this.state.activeListId && <AddTaskForm listId={this.state.activeListId} addTask={this.props.addTask} />}
+        <AddListForm onAdd={addList}/>
+        <Modal isOpened={isModalOpened} onClose={this.setActiveListToNull} header='Add task'>
+          {activeListId && 
+          <AddTaskForm listId={activeListId} addTask={addTask} />}
         </Modal>
-        {this.props.lists.map((list: IList, index: number) => (
-          <ListContainer onTaskAdd={this.setActiveListId} key={list.id} list={list}/>
-        ))}
+        {this.props.lists.map(this.renderList)}
       </div>
     );
   }
-
-  private setActiveListId = (listId: string | null) => {
-    this.setState ({
-      activeListId: listId
-    })
-  }
-
-
-
 }
 
 export default App;

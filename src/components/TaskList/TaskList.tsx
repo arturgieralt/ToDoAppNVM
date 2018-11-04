@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { ITask} from 'src/store/store.types';
-import { ListProps } from './TaskList.types';
+import { IListAllProps, IListState } from './TaskList.types';
 import { Task } from '../Task/Task';
 import './TaskList.css';
-export class TaskList extends React.Component<ListProps, any> {
+export class TaskList extends React.Component<IListAllProps, IListState> {
     
-    private initState = {
+    public initState: IListState = {
         isInDragMode: false,
         draggedElementId: null,
-        oldPostion: null,
+        oldPosition: null,
         newPosition: null
     }
 
-    constructor (props: ListProps) {
+    constructor (props: IListAllProps) {
         super(props);
 
         this.state = {
@@ -20,34 +20,14 @@ export class TaskList extends React.Component<ListProps, any> {
         }
     }
 
-    public render() {
-        return (
-            <div className="taskListContainer">
-                <div className="taskListHeader">
-                    <h2>
-                        {this.props.list.title}
-                    </h2>
-                    <span onClick={() => this.props.onTaskAdd(this.props.list.id)}>&#43;</span>
-                </div>
-                {
-                    this.props.list.orderedTasks.length > 0 ?
-                    <ol>{this.props.list.orderedTasks.map(this.renderTask)}</ol>
-                    : <p>Your list is empty. Add new task by clicking on + button above.</p>
-                } 
-            </div>
-            
-        );
-    }   
-
-    private onDragOver = (event: React.DragEvent<HTMLElement>) => {
+    public onDragOver = (event: React.DragEvent<HTMLElement>) => {
         event.preventDefault();
         this.setState({
             newPosition: Number(event.currentTarget.getAttribute('data-index'))
         });
     }
 
-
-    private onDragStart = (event: React.DragEvent<HTMLElement>,  taskId: string, index:  number) => {
+    public onDragStart = (event: React.DragEvent<HTMLElement>,  taskId: string, index:  number) => {
         this.setState({
             isInDragMode: true,
             oldPosition: index,
@@ -56,10 +36,10 @@ export class TaskList extends React.Component<ListProps, any> {
         
     }
 
-    private onDragEnd = (event: React.DragEvent<HTMLElement>) => {
+    public onDragEnd = (event: React.DragEvent<HTMLElement>) => {
         const {oldPosition, newPosition, draggedElementId} = this.state
         event.preventDefault();
-        if (oldPosition !== newPosition){
+        if (oldPosition !== newPosition && draggedElementId !== null && oldPosition !== null && newPosition !== null){
             this.props.changeTaskOrder(this.props.list.id, draggedElementId, oldPosition, newPosition);
         }
         this.setState({
@@ -67,7 +47,10 @@ export class TaskList extends React.Component<ListProps, any> {
         });
     }
 
-    private renderTask =  (taskKey: string, index: number) => {
+    public onDragBounded = (taskKey: string, index:number) => (e: React.DragEvent<HTMLElement>) => this.onDragStart(e, taskKey, index)
+    public onAddClick = () => this.props.onTaskAdd(this.props.list.id);
+
+    public renderTask =  (taskKey: string, index: number) => {
         const { tasks } = this.props;
         const taskToRender = tasks.find((task: ITask) => {
             return task.id === taskKey;
@@ -78,7 +61,7 @@ export class TaskList extends React.Component<ListProps, any> {
                     <li key={taskKey}
                         data-index={index}
                         draggable={true}
-                        onDragStart={(e) => this.onDragStart(e, taskKey, index)}
+                        onDragStart={this.onDragBounded(taskKey, index)}
                         onDragEnd={this.onDragEnd}
                         onDragOver={this.onDragOver}
                         >
@@ -91,6 +74,25 @@ export class TaskList extends React.Component<ListProps, any> {
                 data-index={index}>
                     <p>Something went wrong! No such task in database.</p>
             </li>
-        )
+        );
     }
+
+    public render() {
+        return (
+            <div className="taskListContainer">
+                <div className="taskListHeader">
+                    <h2>
+                        {this.props.list.title}
+                    </h2>
+                    <span onClick={this.onAddClick}>&#43;</span>
+                </div>
+                {
+                    this.props.list.orderedTasks.length > 0 ?
+                    <ol>{this.props.list.orderedTasks.map(this.renderTask)}</ol> : 
+                    <p>Your list is empty. Add new task by clicking on + button above.</p>
+                } 
+            </div>
+            
+        );
+    }   
 }

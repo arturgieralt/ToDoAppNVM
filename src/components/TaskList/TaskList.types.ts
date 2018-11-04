@@ -16,4 +16,11 @@ export interface IListDispatchProps {
     changeTaskOrder: (listId: string, taskId: string,  oldPosition: number, newPosition: number) => actionTypes.ChangeTaskOrderAction<actionTypes.CHANGE_TASK_ORDER>
 }
 
-export type ListProps = IListProps & IListStateProps & IListDispatchProps;
+export interface IListState {
+    isInDragMode: boolean;
+    draggedElementId: string | null;
+    oldPosition: number | null;
+    newPosition: number | null;
+}
+
+export type IListAllProps = IListProps & IListStateProps & IListDispatchProps;

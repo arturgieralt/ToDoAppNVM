@@ -3,18 +3,22 @@ import { ITaskProps } from './Task.types';
 import './Task.css';
 import * as moment from 'moment';
 
+
+function shouldTaskBeHighlighted (taskDeadline: moment.Moment | undefined, currentDate: moment.Moment, isDone: boolean): boolean {
+    if (taskDeadline && !isDone) {
+        const diff = taskDeadline.diff(currentDate, "h");
+        return (diff >= 0 && diff < 24 )
+    }
+    return false;
+}
+
 export const Task = (props: ITaskProps) => {
     const { task, onClick } = props;
     const style: React.CSSProperties = {
         color: 'yellow'
     }
     const changeTaskStatus = () => onClick(task.id, !task.isDone);
-    let is24HoursBeforeDeadline = false;
-    if (task.expiryDate) {
-        const diff = task.expiryDate.diff(moment(), "h");
-        is24HoursBeforeDeadline = (diff >= 0 && diff < 24 )
-    }
-    
+    const is24HoursBeforeDeadline = shouldTaskBeHighlighted(task.expiryDate, moment(), task.isDone);    
     return (
         <div className='taskContainer'>
             <input type='checkbox' onChange={changeTaskStatus} checked={task.isDone}/>
