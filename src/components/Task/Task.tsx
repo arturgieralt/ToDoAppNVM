@@ -3,7 +3,7 @@ import { ITaskProps } from './Task.types';
 import './Task.css';
 import * as moment from 'moment';
 
-function shouldTaskBeHighlighted(
+export function shouldTaskBeHighlighted(
   taskDeadline: moment.Moment | undefined,
   currentDate: moment.Moment,
   isDone: boolean
