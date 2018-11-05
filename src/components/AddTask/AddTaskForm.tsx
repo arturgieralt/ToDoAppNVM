@@ -23,6 +23,10 @@ export class AddTaskForm extends React.Component<
     super(props);
     const { listId } = this.props;
 
+    this.onInputChange = this.onInputChange.bind(this);
+    this.changeDate = this.changeDate.bind(this);
+    this.addTask = this.addTask.bind(this);
+
     this.state = {
       ...this.initState,
       task: { ...this.initState.task, ...{ listId } }
@@ -33,7 +37,7 @@ export class AddTaskForm extends React.Component<
     return uuid.v4();
   }
 
-  public onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
     const task = Object.assign({}, this.state.task, {
       [name]: value
@@ -44,7 +48,7 @@ export class AddTaskForm extends React.Component<
     });
   };
 
-  public changeDate = (date: Moment | string) => {
+  public changeDate (date: Moment | string) {
     if (typeof date !== 'string') {
       this.setState({
         task: Object.assign({}, this.state.task, {
@@ -54,7 +58,7 @@ export class AddTaskForm extends React.Component<
     }
   };
 
-  public addTask = (event: React.MouseEvent<HTMLInputElement>) => {
+  public addTask (event: React.MouseEvent<HTMLInputElement>) {
     if (this.state.isValid) {
       const taskWithId = Object.assign({}, this.state.task, {
         id: this.guidProvider()

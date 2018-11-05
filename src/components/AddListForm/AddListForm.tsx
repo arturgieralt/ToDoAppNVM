@@ -19,9 +19,11 @@ export class AddListForm extends React.Component<
   constructor(props: IAddListProps) {
     super(props);
     this.state = { ...this.initState };
+    this.onInputChange = this.onInputChange.bind(this);
+    this.addList = this.addList.bind(this);
   }
 
-  public onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value } = event.target;
     const list = Object.assign({}, this.state.list, {
       title: value
@@ -36,7 +38,7 @@ export class AddListForm extends React.Component<
     return uuid.v4();
   }
 
-  public addList = (event: React.MouseEvent<HTMLInputElement>) => {
+  public addList (event: React.MouseEvent<HTMLInputElement>) {
     if (this.state.isValid) {
       const listWithId = Object.assign({}, this.state.list, {
         id: this.guidProvider()

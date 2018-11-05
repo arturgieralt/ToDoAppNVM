@@ -3,7 +3,7 @@ import * as React from 'react'
 import * as Enzyme from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import { TaskList } from './../../components/TaskList/TaskList';
-import { IListState, IListAllProps } from './../../components/TaskList/TaskList.types';
+import { IListAllProps } from './../../components/TaskList/TaskList.types';
 import * as moment from 'moment';
 import { IList, ITask } from './../../store/store.types';
 Enzyme.configure({ adapter: new Adapter() });

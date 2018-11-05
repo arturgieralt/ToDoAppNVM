@@ -14,23 +14,30 @@ export class TaskList extends React.Component<IListAllProps, IListState> {
   constructor(props: IListAllProps) {
     super(props);
 
+    this.onAddClick = this.onAddClick.bind(this);
+    this.onDragBounded = this.onDragBounded.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
+    this.onDragOver = this.onDragOver.bind(this);
+    this.onDragStart = this.onDragStart.bind(this);
+    this.renderTask = this.renderTask.bind(this);
+
     this.state = {
       ...this.initState
     };
   }
 
-  public onDragOver = (event: React.DragEvent<HTMLElement>) => {
+  public onDragOver(event: React.DragEvent<HTMLElement>) {
     event.preventDefault();
     this.setState({
       newPosition: Number(event.currentTarget.getAttribute('data-index'))
     });
   };
 
-  public onDragStart = (
+  public onDragStart (
     event: React.DragEvent<HTMLElement>,
     taskId: string,
     index: number
-  ) => {
+  )  {
     this.setState({
       isInDragMode: true,
       oldPosition: index,
@@ -38,7 +45,7 @@ export class TaskList extends React.Component<IListAllProps, IListState> {
     });
   };
 
-  public onDragEnd = (event: React.DragEvent<HTMLElement>) => {
+  public onDragEnd (event: React.DragEvent<HTMLElement>) {
     const { oldPosition, newPosition, draggedElementId } = this.state;
     event.preventDefault();
     if (
@@ -59,12 +66,14 @@ export class TaskList extends React.Component<IListAllProps, IListState> {
     });
   };
 
-  public onDragBounded = (taskKey: string, index: number) => (
-    e: React.DragEvent<HTMLElement>
-  ) => this.onDragStart(e, taskKey, index);
-  public onAddClick = () => this.props.onTaskAdd(this.props.list.id);
+  public onDragBounded (taskKey: string, index: number) {
+    return (e: React.DragEvent<HTMLElement>) => this.onDragStart(e, taskKey, index);
+  } 
+  public onAddClick (){
+   return this.props.onTaskAdd(this.props.list.id);
+  } 
 
-  public renderTask = (taskKey: string, index: number) => {
+  public renderTask (taskKey: string, index: number) {
     const { tasks } = this.props;
     const taskToRender = tasks.find((task: ITask) => {
       return task.id === taskKey;
