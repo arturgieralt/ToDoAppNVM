@@ -43,7 +43,7 @@ function setup(propsTask: ITask) {
   }
 
 
-describe('Test component', () => {
+describe('Task component', () => {
     it('should render itself and show correct data', () => {
         const { enzymeWrapper } = setup(task);
         const checkboxInputProps = enzymeWrapper.find('input').props();

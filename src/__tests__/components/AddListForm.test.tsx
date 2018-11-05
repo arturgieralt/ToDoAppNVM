@@ -20,7 +20,7 @@ function setup() {
     }
   }
 
-describe('Test component', () => {
+describe('Add List component', () => {
     it('should render itself and show correct data', () => {
         const { enzymeWrapper } = setup();
         const titleInput = enzymeWrapper.find('input[type="text"]');

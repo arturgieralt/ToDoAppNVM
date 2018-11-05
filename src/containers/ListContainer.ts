@@ -12,7 +12,6 @@ const mapStateToProps = (state: IReduxState): IListStateProps => ({
 });
 
 const mapDispatchToProps: IListDispatchProps = {
-  addTask: actions.addTask,
   changeTaskStatus: actions.changeTaskStatus,
   changeTaskOrder: actions.changeTaskOrder
 };

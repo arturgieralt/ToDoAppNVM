@@ -11,7 +11,6 @@ export interface IListProps {
 }
 
 export interface IListDispatchProps {
-  addTask: (task: ITask) => actionTypes.AddTaskAction<actionTypes.ADD_TASK>;
   changeTaskStatus: (
     taskId: string,
     isDone: boolean
