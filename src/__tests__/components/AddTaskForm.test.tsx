@@ -33,17 +33,19 @@ describe('Test component', () => {
         expect(datetimeProps.inputProps!.placeholder).toBe('Choose date');
     });
 
-    it('it adds task redux action when the state is valid and reset it', () => {
+    it('it calls add task redux action when the state is valid and reset it', () => {
         const { enzymeWrapper, props } = setup();
         const addButton = enzymeWrapper.find('input[type="button"]');
+        const titleInput = enzymeWrapper.find('input[type="text"]');
         expect((enzymeWrapper.state() as IAddTaskFormState).isValid).toBe(false);
         addButton.simulate('click');
         expect((props.addTask as jest.Mock<{}>).mock.calls.length).toBe(0);
-        enzymeWrapper.setState({isValid: true}, () => {
-            addButton.simulate('click');
-            expect((enzymeWrapper.state() as IAddTaskFormState).isValid).toBe(false);
-            expect((props.addTask as jest.Mock<{}>).mock.calls.length).toBe(1);
-        });
+        titleInput.simulate('change', {target: {name: "title", value: 'My new task title'}});
+        expect((enzymeWrapper.state() as IAddTaskFormState).isValid).toBe(true);
+        expect((enzymeWrapper.state() as IAddTaskFormState).task.title).toBe('My new task title');
+        addButton.simulate('click');
+        expect((enzymeWrapper.state() as IAddTaskFormState).isValid).toBe(false);
+        expect((props.addTask as jest.Mock<{}>).mock.calls.length).toBe(1);
     });
 
 });
