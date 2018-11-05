@@ -16,25 +16,35 @@ class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
     this.state = { ...this.initState };
+    this.scheduleAction = this.scheduleAction.bind(this);
+    this.setActiveListId = this.setActiveListId.bind(this);
+    this.setActiveListToNull = this.setActiveListToNull.bind(this);
+    this.renderList = this.renderList.bind(this);
   }
 
   public componentDidMount() {
     const interval = 5000;
-    setInterval(
+    this.scheduleAction(interval);
+  }
+
+  public scheduleAction (interval: number) {
+    return setInterval(
       () => this.props.sortTasks(this.props.tasks, moment()),
       interval
     ); // did not destruct to keep the ref
   }
 
-  public setActiveListId = (listId: string | null) => {
+  public setActiveListId (listId: string | null)  {
     this.setState({
       activeListId: listId
     });
   };
 
-  public setActiveListToNull = () => this.setActiveListId(null);
+  public setActiveListToNull () {
+    return this.setActiveListId(null);
+  }
 
-  public renderList = (list: IList, index: number) => {
+  public renderList (list: IList, index: number) {
     return (
       <ListContainer
         onTaskAdd={this.setActiveListId}
@@ -43,6 +53,7 @@ class App extends React.Component<IAppProps, IAppState> {
       />
     );
   };
+
   public render() {
     const { addList, addTask } = this.props;
     const { activeListId } = this.state;

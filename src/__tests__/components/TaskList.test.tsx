@@ -82,16 +82,5 @@ describe('TaskList component', () => {
         enzymeWrapper.find('span').simulate('click');
         expect((props.onTaskAdd as jest.Mock<{}>).mock.calls.length).toBe(1);
     });
-
-    // it('change task order when state is valid and reset it after', () => {
-    //     const { enzymeWrapper, props } = setup();
-    //     enzymeWrapper.instance().
-    //     enzymeWrapper.setState({
-    //         isInDragMode: true,
-    //         draggedElementId: null,
-    //         oldPosition: null,
-    //         newPosition: null
-    //     } as IListState)
-    // });
 });
 
