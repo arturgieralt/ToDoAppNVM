@@ -16,7 +16,9 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
@@ -25,6 +27,7 @@
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",
     "@types/uuid": "^3.4.4",
+    "prettier": "^1.14.3",
     "typescript": "^3.1.5"
   }
 }

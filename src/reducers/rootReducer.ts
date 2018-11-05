@@ -4,6 +4,6 @@ import { tasksReducer } from './tasks';
 import { listsReducer } from './lists';
 
 export const rootReducer = combineReducers<IReduxState>({
-    tasks: tasksReducer,
-    lists: listsReducer
-  });
+  tasks: tasksReducer,
+  lists: listsReducer
+});
